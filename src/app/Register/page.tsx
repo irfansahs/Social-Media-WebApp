@@ -3,7 +3,7 @@
 import React from "react";
 import MainLayout from "../Layouts/MainLayout";
 import { useState, useEffect } from "react";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 function page() {
   const [username, setUsername] = useState("");
@@ -39,10 +39,11 @@ function page() {
           // ...
         }
       });
-      router.push("/");
+    router.push("/");
   };
 
   return (
+    <div className="flex justify-center items-center">
       <div className="w-full max-w-xs">
         <form
           onSubmit={onSubmit}
@@ -109,6 +110,7 @@ function page() {
           </div>
         </form>
       </div>
+    </div>
   );
 }
 

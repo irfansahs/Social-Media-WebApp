@@ -1,13 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import Comments from "./Comments";
 
 const NewPost = (props: any) => {
   return (
-    <div className="flex justify-center my-2">
+    <div className="flex justify-center my-2 ">
       <div
         key={props}
-        className="px-5 py-4 bg-white dark:bg-gray-800 shadow rounded-lg max-w-2xl"
+        className="px-5 py-4 bg-gradient-to-br from-gray-400 via-sky-700 to-blue-900 shadow rounded-lg max-w-2xl"
       >
         <div className="flex mb-4">
           <Link href={`/Profile/${props.name}`}>
@@ -18,11 +17,11 @@ const NewPost = (props: any) => {
           </Link>
 
           <div className="ml-2 mt-0.5">
-            <span className="block font-medium text-base leading-snug text-black dark:text-gray-100">
+            <span className="block font-medium text-base leading-snug text-white dark:text-gray-100">
               {" "}
               content {props.content}
             </span>
-            <span className="block text-sm text-gray-500 dark:text-gray-400 font-light leading-snug">
+            <span className="block text-sm text-white font-light leading-snug">
               16 December at 08:25
             </span>
           </div>
@@ -40,15 +39,17 @@ const NewPost = (props: any) => {
           </p>
           <div className="flex justify-between items-center mt-5">
             <div className="flex ">
-              <span className="ml-1 text-gray-500 dark:text-gray-400  font-light">
+              <span className="ml-1 text-white  font-light">
                 Likes 8
               </span>
             </div>
-            <div className="ml-1 text-gray-500 dark:text-gray-400 font-light">
+            <div className="ml-1 text-white font-light">
               <Link href={""}>33 comments</Link>
             </div>
           </div>
         </Link>
+
+
       </div>
     </div>
   );

@@ -48,7 +48,7 @@ export default function Form() {
   };
 
   return (
-    <div className=" justify-center   bg-slate-100">
+    <div className=" justify-center   bg-slate-100 rounded">
       <SignInButton />
 
       <form

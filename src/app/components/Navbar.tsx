@@ -16,6 +16,14 @@ const Navbar = () => {
       name: "Home",
       url: "/Home",
     },
+    {
+      name: "Massenger",
+      url: "/Massenger",
+    },
+    {
+      name: "CreateUser",
+      url: "/createuser",
+    },
   ];
 
   return (

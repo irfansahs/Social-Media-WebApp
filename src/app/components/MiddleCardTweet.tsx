@@ -104,8 +104,8 @@ const MiddleCardTweet = () => {
           </div>
 
           <div className="flex-1">
-            <button className="bg-blue-400 hover:bg-blue-500 mt-5 text-white font-bold py-2 px-8 rounded-full mr-8 float-right">
-              Tweet
+            <button className="bg-gradient-to-tl from-gray-400 via-sky-700 to-blue-900 hover:opacity-70 mt-5 text-white font-bold py-2 px-8 rounded-full mr-8 float-right">
+              Post
             </button>
           </div>
         </div>

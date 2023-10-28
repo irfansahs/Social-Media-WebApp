@@ -19,7 +19,7 @@ const Leftsidebar = () => {
 
   return (
     <aside
-      className="left-0 z-40 w-76 rounded-lg  mx-auto shadow-lg  dark:bg-gray-800"
+      className="left-0 z-40 w-76 rounded-lg  mx-auto shadow-lg  dark:bg-gray-800 bg-gradient-to-br from-gray-400 via-sky-700 to-blue-900"
     >
       <nav className="p-2">
         <a

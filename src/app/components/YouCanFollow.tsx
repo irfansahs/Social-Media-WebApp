@@ -17,7 +17,7 @@ const YouCanFollow = () => {
     },
   ];
   return (
-    <div className="rounded-lg dark:bg-gray-800 ">
+    <div className="rounded-lg bg-gradient-to-br from-gray-400 via-sky-700 to-blue-900 ">
       <ul>
         {tabs.map((tab, i) => (
           <Link key={i} href={`/Profile/${tab.url}`}>

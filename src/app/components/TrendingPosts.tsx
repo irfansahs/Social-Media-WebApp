@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from "next/link";
 
-const TrendingPosts = () => {
+  const  TrendingPosts = () => {
 
     const tabs = [
         {
@@ -20,7 +20,7 @@ const TrendingPosts = () => {
 
 
   return (
-    <div className="max-w-sm rounded-lg bg-dim-700 overflow-hidden shadow-lg  dark:bg-gray-800 ">
+    <div className="max-w-sm rounded-lg bg-dim-700 overflow-hidden shadow-lg  bg-gradient-to-br from-gray-400 via-sky-700 to-blue-900 ">
     <div className="flex">
         <div className="flex-1 m-2">
             <h2 className="px-4 py-2 text-xl w-48 font-semibold text-white">Germany trends</h2>
