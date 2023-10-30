@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import SignInButton from "./SignInButton";
 
 const Leftsidebar = () => {
   const tabs = [
@@ -18,13 +19,11 @@ const Leftsidebar = () => {
   ];
 
   return (
-    <aside
-      className="left-0 z-40 w-76 rounded-lg  mx-auto shadow-lg  dark:bg-gray-800 bg-gradient-to-br from-gray-400 via-sky-700 to-blue-900"
-    >
+    <aside className="left-0 z-40 w-76 rounded-lg  mx-auto shadow-lg  dark:bg-gray-800 bg-gradient-to-br from-gray-400 via-sky-700 to-blue-900 ">
       <nav className="p-2">
         <a
-          href="#"
-          className="group flex items-center px-2 py-2 text-base leading-6 font-semibold rounded-full bg-gray-800 text-blue-300"
+          href="/Home"
+          className="group flex items-center px-2 py-2 text-base leading-6 font-semibold rounded-full text-white  hover:text-blue-300 duration-100 hover:bg-opacity-70"
         >
           <svg
             className="mr-4 h-6 w-6 "
@@ -43,7 +42,7 @@ const Leftsidebar = () => {
         </a>
         <a
           href="#"
-          className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-semibold rounded-full hover:bg-gray-800 hover:text-blue-300"
+          className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-semibold rounded-full text-white hover:text-blue-300 duration-100 hover:bg-opacity-70"
         >
           <svg
             className="mr-4 h-6 w-6"
@@ -60,7 +59,7 @@ const Leftsidebar = () => {
         </a>
         <a
           href="#"
-          className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-gray-800 hover:text-blue-300"
+          className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full text-white hover:text-blue-300 duration-100 hover:bg-opacity-70"
         >
           <svg
             className="mr-4 h-6 w-6"
@@ -76,8 +75,8 @@ const Leftsidebar = () => {
           Notifications
         </a>
         <a
-          href="#"
-          className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-gray-800 hover:text-blue-300"
+          href="/Messenger"
+          className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full text-white hover:text-blue-300 duration-100 hover:bg-opacity-70"
         >
           <svg
             className="mr-4 h-6 w-6"
@@ -94,7 +93,7 @@ const Leftsidebar = () => {
         </a>
         <a
           href="#"
-          className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-gray-800 hover:text-blue-300"
+          className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full text-white hover:text-blue-300 duration-100 hover:bg-opacity-70"
         >
           <svg
             className="mr-4 h-6 w-6"
@@ -109,26 +108,10 @@ const Leftsidebar = () => {
           </svg>
           Bookmarks
         </a>
+
         <a
           href="#"
-          className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-gray-800 hover:text-blue-300"
-        >
-          <svg
-            className="mr-4 h-6 w-6"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
-          </svg>
-          Lists
-        </a>
-        <a
-          href="#"
-          className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-gray-800 hover:text-blue-300"
+          className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full text-white hover:text-blue-300 duration-100 hover:bg-opacity-70"
         >
           <svg
             className="mr-4 h-6 w-6"
@@ -145,7 +128,7 @@ const Leftsidebar = () => {
         </a>
         <a
           href="#"
-          className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-gray-800 hover:text-blue-300"
+          className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full text-white hover:text-blue-300 duration-100 hover:bg-opacity-70"
         >
           <svg
             className="mr-4 h-6 w-6"
@@ -158,12 +141,14 @@ const Leftsidebar = () => {
           >
             <path d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
-          More
-        </a>
 
-        <button className="bg-blue-400 hover:bg-blue-500 w-full mt-5 text-white font-bold py-2 px-4 rounded-full">
-          Tweet
-        </button>
+          <div className="relative hover-trigger">
+            More
+            <div className="absolute bg-white border border-grey-100 p-6 hover-target">
+              <SignInButton/>
+            </div>
+          </div>
+        </a>
       </nav>
     </aside>
   );

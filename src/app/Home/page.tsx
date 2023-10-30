@@ -6,9 +6,13 @@ import { Button } from "primereact/button";
 import { useState, useEffect } from "react";
 import Post from "../components/Post";
 import MiddleCardTweet from "../components/MiddleCardTweet";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 function page() {
   const [users, setUsers] = useState([]);
+  const { data: session } = useSession();
+  console.log(session);
+
 
   console.log(localStorage.getItem("jwt"));
 

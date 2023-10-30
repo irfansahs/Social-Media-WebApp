@@ -1,9 +1,9 @@
 import React from "react";
 
 const MiddleCardTweet = () => {
-  
   return (
-    <div className="flex justify-center  dark:bg-gray-800  rounded-lg mx-6">
+    <form>
+      <div className="flex justify-center  bg-gradient-to-br from-gray-400 via-sky-700 to-blue-900  rounded-lg mx-6">
         <div>
           <div className="m-2 w-10 py-1">
             <img
@@ -12,12 +12,11 @@ const MiddleCardTweet = () => {
               alt=""
             />
           </div>
-          <div className="flex-1 px-2 pt-2 mt-2">
-            <textarea
-              className=" bg-transparent text-gray-400 font-medium text-lg w-full"
-              placeholder="What's happening?"
-            ></textarea>
-          </div>
+          <textarea
+            className=" bg-transparent text-gray-400 font-medium text-lg w-full"
+            placeholder="What's happening?"
+            required
+          ></textarea>
         </div>
         <div className="flex">
           <div className="w-10"></div>
@@ -104,12 +103,16 @@ const MiddleCardTweet = () => {
           </div>
 
           <div className="flex-1">
-            <button className="bg-gradient-to-tl from-gray-400 via-sky-700 to-blue-900 hover:opacity-70 mt-5 text-white font-bold py-2 px-8 rounded-full mr-8 float-right">
+            <button
+              type="submit"
+              className="bg-gradient-to-tl from-gray-400 via-sky-700 to-blue-900 hover:opacity-70 mt-5 text-white font-bold py-2 px-8 rounded-full mr-8 float-right"
+            >
               Post
             </button>
           </div>
         </div>
       </div>
+    </form>
   );
 };
 

@@ -1,25 +1,65 @@
-import React from 'react'
-import MainLayout from '../../Layouts/MainLayout'
+import React from "react";
+import MainLayout from "../../Layouts/MainLayout";
+import Post from "@/app/components/Post";
 
-function page(props:any) {
+
+function page(props: any) {
   return (
     <MainLayout>
-    <div className="max-w-lg mx-auto my-10 rounded-lg shadow-md p-5 bg-slate-600 ">
-    <img className="w-32 h-32 rounded-full mx-auto" src="https://picsum.photos/200" alt="Profile picture"/>
-    <h2 className="text-center text-2xl font-semibold mt-3">John Doe</h2>
-    <p className="text-center  mt-1">Software Engineer</p>
-    <div className="flex justify-center mt-5">
-      <a href="#" className="text-blue-500 hover:text-blue-700 mx-3">Twitter</a>
-      <a href="#" className="text-blue-500 hover:text-blue-700 mx-3">LinkedIn</a>
-      <a href="#" className="text-blue-500 hover:text-blue-700 mx-3">GitHub</a>
-    </div>
-    <div className="mt-5">
-      <h3 className="text-xl font-semibold">Bio</h3>
-      <p className=" mt-2">John is a software engineer with over 10 years of experience in developing web and mobile applications. He is skilled in JavaScript, React, and Node.js.</p>
-    </div>
-  </div>
+      <div>
+        <div className=" bg-gradient-to-br from-gray-400 via-sky-700 to-blue-900 rounded-lg relative mx-auto flex h-full w-full max-w-2xl flex-col items-center  bg-cover bg-clip-border p-[16px] dark:text-white dark:shadow-none">
+          <div className="relative mt-1 flex h-32 w-full justify-center rounded-xl bg-cover">
+            <div className="absolute -bottom-12 flex h-[88px] w-[88px] items-center justify-center rounded-full border-[4px] border-white bg-pink-400">
+              <img
+                className="h-full w-full rounded-full"
+                src="https://i.ibb.co/6YbS9ff/avatar11.png"
+                alt=""
+              />
+            </div>
+          </div>
+          <div className="mt-16 flex flex-col items-center">
+            <h4 className="text-bluePrimary text-xl font-bold">
+              Adela Parkson
+            </h4>
+            <p className="text-lightSecondary text-base font-normal">
+              @Product Manager
+            </p>
+          </div>
+          <div className="mt-6 mb-3 flex gap-4 md:!gap-14">
+            <div className="flex flex-col items-center justify-center">
+              <h3 className="text-bluePrimary text-2xl font-bold">17</h3>
+              <p className="text-lightSecondary text-sm font-normal">Posts</p>
+            </div>
+            <div className="flex flex-col items-center justify-center">
+              <h3 className="text-bluePrimary text-2xl font-bold">9.7K</h3>
+              <p className="text-lightSecondary text-sm font-normal">
+                Followers
+              </p>
+            </div>
+            <div className="flex flex-col items-center justify-center">
+              <h3 className="text-bluePrimary text-2xl font-bold">434</h3>
+              <p className="text-lightSecondary text-sm font-normal">
+                Following
+              </p>
+            </div>
+            <div className="flex flex-col items-center justify-center">
+              <a href="" className=" float-right">
+                <button className="bg-transparent hover:bg-gray-800 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded-full">
+                  +
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+<Post/>
+
+
     </MainLayout>
-  )
+  );
 }
 
-export default page
+export default page;

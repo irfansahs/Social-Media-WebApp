@@ -1,11 +1,14 @@
 "use client";
+
 import React from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useState } from "react";
+import Router, { useRouter } from "next/navigation";
 
 const SignInButton = () => {
   const { data: session } = useSession();
   console.log(session);
+  const router = useRouter();
 
   const onSubmit = (e: any) => {
     e.preventDefault();
@@ -22,6 +25,7 @@ const SignInButton = () => {
         if (data.success) {
           // Kullanıcıyı oturum açmış olarak işaretleyin.
           console.log(data, session);
+          router.push("/Home");
         } else {
           // Kimlik bilgileri yanlışsa, bir hata gösterin.
           console.log(data);
@@ -32,8 +36,9 @@ const SignInButton = () => {
 
   if (session && session.user) {
     return (
-      <div className="flex gap-4 ml-auto">
+      <div className="flex flex-col gap-4 ml-auto">
         <p className="text-sky-600">{session.user.name}</p>
+        <img src={`${session.user.image}`} />
         <button onClick={() => signOut()} className="text-red-600">
           Sign Out
         </button>

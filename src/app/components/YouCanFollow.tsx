@@ -45,7 +45,7 @@ const YouCanFollow = () => {
                 <div className="flex-1  py-1 m-1">
                   <a href="" className=" float-right">
                     <button className="bg-transparent hover:bg-gray-800 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded-full">
-                      Follow
+                      +
                     </button>
                   </a>
                 </div>

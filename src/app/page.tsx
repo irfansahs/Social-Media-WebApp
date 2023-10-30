@@ -1,11 +1,10 @@
+import { SessionProvider } from "next-auth/react";
 import Form from "./components/Form";
-import MainLayout from "./Layouts/MainLayout";
 
-export default function Home() {
+export default function Home(props: any) {
   return (
     <div className="flex justify-center items-center">
-
-      <Form />
-</div>
+        <Form />
+    </div>
   );
 }

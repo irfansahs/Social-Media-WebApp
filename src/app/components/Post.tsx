@@ -1,9 +1,9 @@
 import React from "react";
 import Link from "next/link";
 
-const NewPost = (props: any) => {
+const Post = (props: any) => {
   return (
-    <div className="flex justify-center my-2 ">
+    <div className="flex justify-center my-2 rounded-lg">
       <div
         key={props}
         className="px-5 py-4 bg-gradient-to-br from-gray-400 via-sky-700 to-blue-900 shadow rounded-lg max-w-2xl"
@@ -55,4 +55,4 @@ const NewPost = (props: any) => {
   );
 };
 
-export default NewPost;
+export default Post;
