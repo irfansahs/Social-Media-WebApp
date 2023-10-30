@@ -37,9 +37,7 @@ const TrendingPosts = () => {
               <h2 className="px-4 ml-2 w-48 font-bold text-white">
                 #{tab.name}
               </h2>
-              <p className="px-4 ml-2 mb-3 w-48 text-xs text-gray-400">
-                5,466 Tweets
-              </p>
+             
             </div>
             <div className="flex-1 px-4 py-2 m-2">
               <a
