@@ -5,11 +5,13 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 import Router, { useRouter } from "next/navigation";
 
-const SignInButton = ({ user, account }: any) => {
+const SignInButton = () => {
+  const { data: account } = useSession();
   const { data: session } = useSession();
-  console.log(session);
-  console.log("google login", account);
+  
+  console.log(account);
   const router = useRouter();
+
 
   const onSubmit = (e: any) => {
     e.preventDefault();
@@ -19,13 +21,13 @@ const SignInButton = ({ user, account }: any) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: account,
+      body: JSON.stringify(account),
     })
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
           // Kullanıcıyı oturum açmış olarak işaretleyin.
-          console.log(data, session);
+          console.log(data, account);
           router.push("/Home");
         } else {
           // Kimlik bilgileri yanlışsa, bir hata gösterin.
