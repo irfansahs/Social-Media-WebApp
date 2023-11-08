@@ -6,6 +6,7 @@ import SignInButton from "./SignInButton";
 
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
+import Link from "next/link";
 
 export default function Form(props: any) {
   const {
@@ -91,7 +92,19 @@ export default function Form(props: any) {
           )}
         </div>
 
-        <button type="submit">Giriş Yap</button>
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          type="submit"
+        >
+          Log in
+        </button>
+        <Link
+          className="ml-4 bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          href={"ForgotPassword"}
+          type="submit"
+        >
+          Forgot Password ?
+        </Link>
       </form>
     </div>
   );

@@ -5,6 +5,7 @@ import { PrimeReactProvider, PrimeReactContext } from "primereact/api";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import Providers from "./components/Providers";
 import Navbar from "./components/Navbar";
+import 'primeicons/primeicons.css';
 
 const inter = Inter({ subsets: ["latin"] });
 

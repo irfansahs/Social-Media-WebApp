@@ -1,4 +1,3 @@
-import React from "react";
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
@@ -17,8 +16,16 @@ const handler = NextAuth({
     GitHubProvider({
       clientId: process.env.GITHUB_ID ?? "",
       clientSecret: process.env.GITHUB_SECRET ?? "",
-    })
+    }),
   ],
+  callbacks: {
+    async signIn({ user, account }: any) {
+      console.log("user", user);
+      console.log("account", account);
+
+      return account;
+    },
+  },
 });
 
 export { handler as GET, handler as POST };

@@ -5,9 +5,10 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 import Router, { useRouter } from "next/navigation";
 
-const SignInButton = () => {
+const SignInButton = ({ user, account }: any) => {
   const { data: session } = useSession();
   console.log(session);
+  console.log("google login", account);
   const router = useRouter();
 
   const onSubmit = (e: any) => {
@@ -18,7 +19,7 @@ const SignInButton = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(session),
+      body: account,
     })
       .then((response) => response.json())
       .then((data) => {

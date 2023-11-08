@@ -5,6 +5,8 @@ import MainLayout from "../Layouts/MainLayout";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { ColorPicker } from "primereact/colorpicker";
+import UploadPhoto from "../components/UploadPhoto";
 
 function page() {
   const {
@@ -14,6 +16,21 @@ function page() {
   } = useForm();
 
   const router = useRouter();
+
+  const [profilePhoto, setProfilePhoto] = useState();
+
+  const handleProfilePhoto = async (req: any, res: any) => {
+    const profilePhotoFile = req.file;
+
+    if (profilePhotoFile.size > 2048000) {
+      const resizedProfilePhoto = await profilePhotoFile.resize(500, 500);
+      setProfilePhoto(resizedProfilePhoto);
+    } else {
+      setProfilePhoto(profilePhotoFile);
+    }
+
+    res.send(profilePhoto);
+  };
 
   const onSubmit = (data: any) => {
     console.log(data);
@@ -38,12 +55,19 @@ function page() {
   };
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex flex-col justify-center items-center"><div className="mb-4">
+            <UploadPhoto />
+          </div>
       <div className="w-full max-w-xs">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         >
+          
+          <div className="mb-4 flex justify-center ">
+            <ColorPicker />
+            <p className="m-2">Choose your color</p>
+          </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Username
@@ -54,12 +78,12 @@ function page() {
               type="text"
               placeholder="Username"
               {...register("username", { required: true })}
-              />
-              {errors.username && (
-                <p className="text-red-500 text-xs italic">
-                  Please choose a username.
-                </p>
-              )}
+            />
+            {errors.username && (
+              <p className="text-red-500 text-xs italic">
+                Please choose a username.
+              </p>
+            )}
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -71,12 +95,12 @@ function page() {
               type="email"
               placeholder="Email"
               {...register("email", { required: true })}
-              />
-              {errors.email && (
-                <p className="text-red-500 text-xs italic">
-                  Please choose a email.
-                </p>
-              )}
+            />
+            {errors.email && (
+              <p className="text-red-500 text-xs italic">
+                Please choose a email.
+              </p>
+            )}
           </div>
           <div className="mb-6">
             <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -102,13 +126,8 @@ function page() {
             >
               Sign Up
             </button>
-            <a
-              className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-              href="#"
-            >
-              Forgot Password ?
-            </a>
           </div>
+          <div></div>
         </form>
       </div>
     </div>
