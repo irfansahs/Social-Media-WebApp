@@ -20,7 +20,6 @@ export default function Form(props: any) {
   // 359247775554-f776m6md9juksvfh4anfccfmsroc32o0.apps.googleusercontent.com
 
   const onSubmit = (data: any) => {
-    data.preventDefault();
     // API'ye kimlik bilgilerini gönderin.
 
     fetch("https://localhost:7197/api/User/action", {

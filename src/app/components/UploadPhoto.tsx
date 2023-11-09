@@ -54,7 +54,7 @@ export default function UploadPhoto() {
                 {uploadButton}
                 {cancelButton}
                 <div className="flex align-items-center gap-3 ml-auto">
-                    <span>{formatedValue} / 1 MB</span>
+                    <span>{formatedValue} / 2 MB</span>
                     <ProgressBar value={value} showValue={false} style={{ width: '10rem', height: '12px' }}></ProgressBar>
                 </div>
             </div>

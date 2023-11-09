@@ -2,6 +2,8 @@ import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import GitHubProvider from "next-auth/providers/github";
+import { useEffect } from "react";
+import { Console } from "console";
 
 const handler = NextAuth({
   providers: [
@@ -20,12 +22,29 @@ const handler = NextAuth({
   ],
   callbacks: {
     async signIn({ user, account }: any) {
-      console.log("user", user);
-      console.log("account", account);
+      const data = {
+        idToken: account.id_token,
+        provider: account.provider,
+        email: user.email,
+      };
+
+      try {
+        console.log(data);
+        await fetch(" http://localhost:5196/api/User/GoogleLogin", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+      } catch (error) {
+        console.log(error);
+      }
 
       return account;
     },
   },
+  secret: process.env.NEXTAUTH_SECRET,
 });
 
 export { handler as GET, handler as POST };

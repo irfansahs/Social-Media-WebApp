@@ -55,15 +55,15 @@ function page() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center"><div className="mb-4">
-            <UploadPhoto />
-          </div>
+    <div className="flex flex-col justify-center items-center">
+      <div className="mb-4">
+        <UploadPhoto />
+      </div>
       <div className="w-full max-w-xs">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         >
-          
           <div className="mb-4 flex justify-center ">
             <ColorPicker />
             <p className="m-2">Choose your color</p>
@@ -92,9 +92,12 @@ function page() {
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="email"
-              type="email"
+              type="text"
               placeholder="Email"
-              {...register("email", { required: true })}
+              {...register("email", {
+                required: true,
+                pattern: /^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
+              })}
             />
             {errors.email && (
               <p className="text-red-500 text-xs italic">
@@ -111,11 +114,15 @@ function page() {
               id="password"
               type="password"
               placeholder="Password"
-              {...register("password", { required: true })}
+              {...register("password", {
+                required: true,
+                pattern: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).+$/i,
+              })}
             />
             {errors.password && (
               <p className="text-red-500 text-xs italic">
-                Please choose a password.
+                Password must contain uppercase, punctuation, and numeric
+                characters.
               </p>
             )}
           </div>

@@ -15,8 +15,11 @@ function page({ params }: any) {
   const router = useRouter();
 
   const onSubmit = (data: any) => {
+    data.userId = params.id;
+    data.resetToken = params.resetToken;
+
     console.log(data);
-    fetch("https://localhost:7197/api/User", {
+    fetch("https://localhost:7197/api/User/UpdatePassword", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,10 +54,9 @@ function page({ params }: any) {
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
-              type="email"
+              type="text"
               placeholder="Password"
-              {...register("email", { required: true })}
+              {...register("newPassword", { required: true })}
             />
             {errors.email && (
               <p className="text-red-500 text-xs italic">
@@ -69,10 +71,9 @@ function page({ params }: any) {
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
-              type="email"
+              type="text"
               placeholder="Password"
-              {...register("email", { required: true })}
+              {...register("newPassword", { required: true })}
             />
             {errors.email && (
               <p className="text-red-500 text-xs italic">
