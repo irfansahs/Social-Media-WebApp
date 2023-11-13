@@ -5,8 +5,8 @@ import MainLayout from "../Layouts/MainLayout";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { ColorPicker } from "primereact/colorpicker";
 import UploadPhoto from "../components/UploadPhoto";
+import { ColorPicker } from "primereact/colorpicker";
 
 function page() {
   const {
@@ -56,7 +56,7 @@ function page() {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="mb-4">
+      <div className="w-full max-w-xs">
         <UploadPhoto />
       </div>
       <div className="w-full max-w-xs">
@@ -66,6 +66,7 @@ function page() {
         >
           <div className="mb-4 flex justify-center ">
             <ColorPicker />
+
             <p className="m-2">Choose your color</p>
           </div>
           <div className="mb-4">

@@ -16,7 +16,7 @@ function page() {
 
   const onSubmit = (data: any) => {
     console.log(data);
-    fetch("https://localhost:7197/api/User", {
+    fetch("https://localhost:7197/api/User/ResetPassword", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
