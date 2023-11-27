@@ -3,10 +3,20 @@
 import React from "react";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+
+import { Options } from "next/dist/server/base-server";
+import { redirect } from "next/navigation";
 
 const Navbar = () => {
-  const { data: session } = useSession();
+  const { data: session } = useSession({
+    required: false,
+    onUnauthenticated() {
+      redirect("/");
+    },
+  });
   console.log(session);
+
   const tabs = [
     {
       name: "Login",
@@ -43,6 +53,23 @@ const Navbar = () => {
               {tab.name}
             </Link>
           ))}
+        </ul>
+        <ul>
+          {session ? (
+            <div className="flex flex-col gap-4 ml-auto">
+              <button onClick={() => signOut()} className="text-red-600">
+                Sign Out
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => signIn()}
+              type="submit"
+              className="text-green-600 ml-auto"
+            >
+              Sign In
+            </button>
+          )}
         </ul>
       </div>
     </nav>

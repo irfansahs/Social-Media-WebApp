@@ -1,6 +1,9 @@
 import React from "react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const MiddleCardTweet = () => {
+  const { data: session } = useSession();
+
   return (
     <form>
       <div className="flex justify-center  bg-gradient-to-br from-gray-400 via-sky-700 to-blue-900  rounded-lg mx-6">
@@ -8,7 +11,7 @@ const MiddleCardTweet = () => {
           <div className="m-2 w-10 py-1">
             <img
               className="inline-block h-10 w-10 rounded-full"
-              src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
+              src={`${session?.user?.image}`}
               alt=""
             />
           </div>

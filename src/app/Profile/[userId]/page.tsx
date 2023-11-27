@@ -2,7 +2,6 @@ import React from "react";
 import MainLayout from "../../Layouts/MainLayout";
 import Post from "@/app/components/Post";
 
-
 function page(props: any) {
   return (
     <MainLayout>
@@ -12,7 +11,7 @@ function page(props: any) {
             <div className="absolute -bottom-12 flex h-[88px] w-[88px] items-center justify-center rounded-full border-[4px] border-white bg-pink-400">
               <img
                 className="h-full w-full rounded-full"
-                src="https://i.ibb.co/6YbS9ff/avatar11.png"
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                 alt=""
               />
             </div>
@@ -22,7 +21,7 @@ function page(props: any) {
               Adela Parkson
             </h4>
             <p className="text-lightSecondary text-base font-normal">
-              @Product Manager
+              @AdelaParkson
             </p>
           </div>
           <div className="mt-6 mb-3 flex gap-4 md:!gap-14">
@@ -53,11 +52,7 @@ function page(props: any) {
         </div>
       </div>
 
-
-
-<Post/>
-
-
+      <Post />
     </MainLayout>
   );
 }
