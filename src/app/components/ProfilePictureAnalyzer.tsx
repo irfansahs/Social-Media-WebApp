@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const ProfilePictureAnalyzer: React.FC = () => {
-  const [mainColor, setMainColor] = useState<number[]>([]);
+  const [mainColor, setMainColor] = useState<string>("");
   
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -21,16 +21,12 @@ const ProfilePictureAnalyzer: React.FC = () => {
           const ctx = canvas.getContext('2d');
           ctx?.drawImage(img, 0, 0, img.width, img.height);
 
-          const pixelData = ctx?.getImageData(0, 0, img.width, img.height).data;
-
-          if (pixelData) {
-            const colors: number[] = [];
-            for (let i = 0; i < pixelData.length; i += 4) {
-              colors.push(pixelData[i], pixelData[i + 1], pixelData[i + 2]);
-            }
-            const averageColor = calculateAverageColor(colors);
-            setMainColor(averageColor);
-            console.log(averageColor);
+          const imageData = ctx?.getImageData(0, 0, img.width, img.height);
+          const hexColor = calculateHexColor(imageData?.data);
+          
+          if (hexColor) {
+            setMainColor(hexColor);
+            console.log(hexColor);
           }
         };
       };
@@ -39,24 +35,30 @@ const ProfilePictureAnalyzer: React.FC = () => {
     }
   };
 
-  const calculateAverageColor = (colors: number[]): number[] => {
-    const totalColors = colors.length / 3;
-    const sum = colors.reduce((acc, color) => acc + color, 0);
-    const average = sum / totalColors;
-    return [average, average, average]; // For simplicity, returning a grayscale average color
+  const calculateHexColor = (pixelData: Uint8ClampedArray | undefined): string | undefined => {
+    if (!pixelData) return undefined;
+
+    const colors: string[] = [];
+    for (let i = 0; i < pixelData.length; i += 4) {
+      const hex = `#${pixelData[i].toString(16).padStart(2, '0')}${pixelData[i + 1].toString(16).padStart(2, '0')}${pixelData[i + 2].toString(16).padStart(2, '0')}`;
+      colors.push(hex);
+    }
+
+    // Use the first color as the average color
+    return colors[0];
   };
 
   return (
     <div>
       <input type="file" onChange={handleFileChange} accept="image/*" />
-      {mainColor.length > 0 && (
+      {mainColor && (
         <div>
           <p>Main Color:</p>
           <div
             style={{
               width: '50px',
               height: '50px',
-              backgroundColor: `rgb(${mainColor.join(',')})`,
+              backgroundColor: mainColor,
             }}
           ></div>
         </div>

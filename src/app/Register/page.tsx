@@ -10,6 +10,8 @@ import { ColorPicker } from "primereact/colorpicker";
 import ProfilePictureAnalyzer from "../components/ProfilePictureAnalyzer";
 
 function page() {
+  const [mainColor, setMainColor] = useState<string>("");
+
   const {
     register,
     handleSubmit,
@@ -18,38 +20,85 @@ function page() {
 
   const router = useRouter();
 
-  const [profilePhoto, setProfilePhoto] = useState();
+  const [profilePhoto, setProfilePhoto] = useState<string>("");
 
-  const handleProfilePhoto = async (req: any, res: any) => {
-    const profilePhotoFile = req.file;
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
 
-    if (profilePhotoFile.size > 2048000) {
-      const resizedProfilePhoto = await profilePhotoFile.resize(500, 500);
-      setProfilePhoto(resizedProfilePhoto);
-    } else {
-      setProfilePhoto(profilePhotoFile);
+    if (file) {
+      const reader = new FileReader();
+      setProfilePhoto(file.name);
+      reader.onload = (e) => {
+        const img = new Image();
+        img.src = e.target?.result as string;
+
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          canvas.width = img.width;
+          canvas.height = img.height;
+
+          const ctx = canvas.getContext("2d");
+          ctx?.drawImage(img, 0, 0, img.width, img.height);
+
+          const imageData = ctx?.getImageData(0, 0, img.width, img.height);
+          const hexColor = calculateHexColor(imageData?.data);
+
+          if (hexColor) {
+            setMainColor(hexColor);
+            console.log(hexColor);
+          }
+        };
+      };
+
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const calculateHexColor = (
+    pixelData: Uint8ClampedArray | undefined
+  ): string | undefined => {
+    if (!pixelData) return undefined;
+
+    const colors: string[] = [];
+    for (let i = 0; i < pixelData.length; i += 4) {
+      const hex = `#${pixelData[i].toString(16).padStart(2, "0")}${pixelData[
+        i + 1
+      ]
+        .toString(16)
+        .padStart(2, "0")}${pixelData[i + 2].toString(16).padStart(2, "0")}`;
+      colors.push(hex);
     }
 
-    res.send(profilePhoto);
+    // Use the first color as the average color
+    return colors[0];
   };
 
   const onSubmit = (data: any) => {
     console.log(data);
+
+    const postData = {
+      userName: data.username,
+      email: data.email,
+      password: data.password,
+      profileImage: profilePhoto,
+      userColor: mainColor,
+    };
+
     fetch("https://localhost:7197/api/User", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(postData),
     })
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
           // Kullanıcıyı oturum açmış olarak işaretleyin.
-          console.log(data);
+          console.log(postData);
         } else {
           // Kimlik bilgileri yanlışsa, bir hata gösterin.
-          console.log(data);
+          console.log(postData);
           // ...
         }
       });
@@ -61,7 +110,21 @@ function page() {
         <UploadPhoto />
       </div>
       <div className="w-full max-w-xs">
-        <ProfilePictureAnalyzer />
+        <div>
+          <input type="file" onChange={handleFileChange} accept="image/*" />
+          {mainColor && (
+            <div>
+              <p>Main Color:</p>
+              <div
+                style={{
+                  width: "50px",
+                  height: "50px",
+                  backgroundColor: mainColor,
+                }}
+              ></div>
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="w-full max-w-xs">
