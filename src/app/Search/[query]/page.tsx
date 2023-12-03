@@ -8,7 +8,6 @@ function page() {
   
   return (
     <MainLayout>
-      <Post/>
     </MainLayout>
   );
 }

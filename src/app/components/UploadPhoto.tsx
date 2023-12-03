@@ -81,6 +81,10 @@ export default function UploadPhoto() {
                 onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
                 headerTemplate={headerTemplate} itemTemplate={itemTemplate} 
                 chooseOptions={chooseOptions} cancelOptions={cancelOptions} />
+        
+        
+   
+        
         </div>
     )
 }

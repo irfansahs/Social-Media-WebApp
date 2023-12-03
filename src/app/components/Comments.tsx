@@ -1,12 +1,28 @@
 import React from "react";
 import Link from "next/link";
-import WriteComment from "./WriteComment";
-const Comments = (props: any) => {
+const Comments = ({ user }: { user: any }) => {
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`https://localhost:7197/api/Comments`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          // Add any additional headers if needed
+        },
+        body: JSON.stringify({ commentId: user.id }),
+      });
+      console.log("Post deleted successfully");
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <div className="">
-      <WriteComment />
-
-      <div className="flex items-center justify-center bg-gradient-to-br from-gray-400 via-sky-700 to-blue-900">
+      <div
+        className="flex items-center justify-center bg-gradient-to-br from-gray-400 via-sky-700 to-blue-900"
+        key={user.id}
+      >
         <div className="">
           <div className="bg-gray-100  rounded px-2 pb-2">
             <div className="font-medium">
@@ -14,10 +30,7 @@ const Comments = (props: any) => {
                 <small>Hasan Muhammad</small>
               </a>
             </div>
-            <div className="">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Expedita, maiores!
-            </div>
+            <div className="">{user.content}</div>
           </div>
           <div className="flex justify-start items-center  w-full">
             <div className="font-semibold text-gray-700 px-2 flex items-center justify-center ">
@@ -30,8 +43,14 @@ const Comments = (props: any) => {
               </a>
               <small className="self-center">.</small>
               <a href="#" className="hover:underline">
-                <small>15 hour</small>
+                <small>{user.createdOn}</small>
               </a>
+              <button
+                onClick={handleDelete}
+                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+              >
+                Delete
+              </button>
             </div>
           </div>
         </div>

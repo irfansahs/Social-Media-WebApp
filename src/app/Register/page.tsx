@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 import UploadPhoto from "../components/UploadPhoto";
 import { ColorPicker } from "primereact/colorpicker";
+import ProfilePictureAnalyzer from "../components/ProfilePictureAnalyzer";
 
 function page() {
   const {
@@ -59,6 +60,10 @@ function page() {
       <div className="w-full max-w-xs">
         <UploadPhoto />
       </div>
+      <div className="w-full max-w-xs">
+        <ProfilePictureAnalyzer />
+      </div>
+
       <div className="w-full max-w-xs">
         <form
           onSubmit={handleSubmit(onSubmit)}

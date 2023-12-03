@@ -13,12 +13,11 @@ function page() {
   const { data: session } = useSession();
   console.log(session);
 
-
   console.log(localStorage.getItem("jwt"));
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const response = await fetch("https://localhost:7197/api/Comments", {
+      const response = await fetch("https://localhost:7197/api/Post", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -36,13 +35,11 @@ function page() {
   return (
     <MainLayout>
       <div>
-        <MiddleCardTweet />
-
-        <Post />
+        <MiddleCardTweet username={"Ahmet"} />
 
         <div>
           {users.map((user: any) => (
-            <Post key={user} />
+            <Post key={user.id} user={user} />
           ))}
         </div>
       </div>
