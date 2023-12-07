@@ -11,8 +11,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 function page() {
   const [users, setUsers] = useState([]);
   const { data: session } = useSession();
-  console.log(session);
-
+  console.log("irfan data", session?.user?.accessToken);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -20,6 +19,7 @@ function page() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${session?.user?.accessToken as string}`,
         },
       });
 

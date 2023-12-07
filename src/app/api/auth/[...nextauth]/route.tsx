@@ -80,9 +80,14 @@ const handler = NextAuth({
       return account;
     },
 
-    async jwt({ token, user, account, profile, isNewUser }) {
-      return token;
+    async jwt({ token, user }) {
+      return {...token,...user};
     },
+    async session({session, token, user }) {
+      session.user = token;
+      return session;
+    },
+
   },
   secret: process.env.NEXTAUTH_SECRET,
 });
