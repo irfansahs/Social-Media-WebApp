@@ -66,9 +66,9 @@ function page({ params }: any) {
     <MainLayout>
       <div>
         <div className=" bg-gradient-to-br from-gray-400 via-sky-700 to-blue-900 rounded-lg relative mx-auto flex h-full w-full max-w-2xl flex-col items-center  bg-cover bg-clip-border p-[16px] dark:text-white dark:shadow-none">
-          <div style={{backgroundColor:profile?.userColor}} className=" relative mt-1 flex h-32 w-full justify-center rounded-xl bg-cover">
+          <div  style={{backgroundColor:profile?.userColor}} className=" relative mt-1 flex h-32 w-full justify-center rounded-xl bg-cover">
             <div className="absolute -bottom-12 flex h-[88px] w-[88px] items-center justify-center rounded-full border-[4px] border-white">
-              <img src={profile?.profileImage} alt={profile?.userName} />
+              <img className="border-[4px] border-white" src={"/profile1.png"} alt={profile?.userName} />
             </div>
           </div>
           <div className="mt-16 flex flex-col items-center">
@@ -102,12 +102,12 @@ function page({ params }: any) {
             </div>
           </div>
 
-          <div>
+          
+        </div><div>
             {users?.map((user: any) => (
               <Post key={user.id} user={user} />
             ))}
           </div>
-        </div>
       </div>
     </MainLayout>
   );

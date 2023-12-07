@@ -7,6 +7,10 @@ import Router, { useRouter } from "next/navigation";
 const SignInButton = () => {
   const { data: session } = useSession();
   const router = useRouter();
+
+
+ 
+
   if (session && session.user) {
     return (
       <div className="flex flex-col gap-4 ml-auto">

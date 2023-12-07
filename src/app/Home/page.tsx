@@ -13,7 +13,6 @@ function page() {
   const { data: session } = useSession();
   console.log(session);
 
-  console.log(localStorage.getItem("jwt"));
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -21,7 +20,6 @@ function page() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `bearer ${localStorage.getItem("jwt")} `,
         },
       });
 

@@ -27,7 +27,7 @@ const Comments = ({ user }: { user: any }) => {
           <div className="bg-gray-100  rounded px-2 pb-2">
             <div className="font-medium">
               <a href="#" className="hover:underline text-sm">
-                <small>Hasan Muhammad</small>
+                <small>{user?.username}</small>
               </a>
             </div>
             <div className="">{user.content}</div>

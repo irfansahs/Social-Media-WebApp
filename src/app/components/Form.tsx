@@ -7,6 +7,7 @@ import SignInButton from "./SignInButton";
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function Form(props: any) {
   const {
@@ -17,10 +18,15 @@ export default function Form(props: any) {
 
   const router = useRouter();
 
-  // 359247775554-f776m6md9juksvfh4anfccfmsroc32o0.apps.googleusercontent.com
+  const { data: session } = useSession();
+  const { data: jwt } = useSession();
+  
+
+  console.log(session);
+  console.log(jwt);
+
 
   const onSubmit = (data: any) => {
-    // API'ye kimlik bilgilerini gönderin.
 
     fetch("https://localhost:7197/api/User/action", {
       method: "POST",
@@ -32,20 +38,11 @@ export default function Form(props: any) {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.success) {
-          // Kullanıcıyı oturum açmış olarak işaretleyin.
-
-          console.log(data);
-        } else {
-          // Kimlik bilgileri yanlışsa, bir hata gösterin.
-          localStorage.setItem("jwt", data.accessToken);
-          console.log(data.accessToken);
-          // ...
-        }
       });
     router.push("/Home");
   };
-
+  
+ 
   return (
     <div className=" justify-center   bg-slate-100 rounded">
       <SignInButton />
@@ -89,19 +86,31 @@ export default function Form(props: any) {
           )}
         </div>
 
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          type="submit"
-        >
-          Log in
-        </button>
-        <Link
-          className="ml-4 bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          href={"ForgotPassword"}
-          type="submit"
-        >
-          Forgot Password ?
-        </Link>
+        <div>
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            Log in
+          </button>
+        </div>
+        <div>
+          <Link
+            className="mt-4 bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            href={"ForgotPassword"}
+            type="submit"
+          >
+            Forgot Password ?
+          </Link>
+        </div>
+        <div>
+          <Link
+            className="mt-4 bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            href={"Register"}
+          >
+            Register
+          </Link>
+        </div>
       </form>
     </div>
   );

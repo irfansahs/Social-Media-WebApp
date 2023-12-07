@@ -23,7 +23,6 @@ export default function RootLayout({
     <Providers>
       <html lang="en" className="bg-gradient-to-r from-blue-800 to-indigo-900">
         <body className={inter.className} >
-          <Navbar/>
           {children}</body>
       </html>
     </Providers>

@@ -9,6 +9,8 @@ import { useState, useEffect } from "react";
 import WriteComment from "@/app/components/WriteComment";
 function page({ params }: any) {
   const [users, setUsers] = useState([]);
+  const [posts, setPosts] = useState();
+  
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -27,11 +29,33 @@ function page({ params }: any) {
       console.log(users);
     };
     fetchUsers();
+
+
+    const fetchPosts = async () => {
+      const response = await fetch(
+        `https://localhost:7197/api/Post/GetPostById?PostId=${params.postid}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const posts = await response.json();
+      setPosts(posts);
+      console.log(posts);
+    };
+    fetchPosts();
   }, []);
 
   return (
     <MainLayout>
       <div>
+
+              <Post user={posts} />
+
+
         <WriteComment postid={params.postid} />
         {users.map((user: any) => (
           <Comments key={user.id} user={user} />

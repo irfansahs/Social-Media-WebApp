@@ -1,16 +1,22 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import MainLayout from "../Layouts/MainLayout";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 import UploadPhoto from "../components/UploadPhoto";
-import { ColorPicker } from "primereact/colorpicker";
-import ProfilePictureAnalyzer from "../components/ProfilePictureAnalyzer";
+import { Toast } from 'primereact/toast';
+import { ColorPicker, ColorPickerChangeEvent } from 'primereact/colorpicker';
+import { signIn, signOut, useSession } from "next-auth/react";
 
 function page() {
   const [mainColor, setMainColor] = useState<string>("");
+  const toast = useRef<Toast>(null);
+
+  const showSuccess = () => {
+      toast.current?.show({severity:'success', summary: 'Success', detail:'Message Content', life: 3000});
+  }
 
   const {
     register,
@@ -22,8 +28,9 @@ function page() {
 
   const [profilePhoto, setProfilePhoto] = useState<string>("");
 
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
+  const file = event.target.files?.[0];
 
     if (file) {
       const reader = new FileReader();
@@ -73,6 +80,9 @@ function page() {
     return colors[0];
   };
 
+
+
+
   const onSubmit = (data: any) => {
     console.log(data);
 
@@ -93,15 +103,10 @@ function page() {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.success) {
-          // Kullanıcıyı oturum açmış olarak işaretleyin.
           console.log(postData);
-        } else {
-          // Kimlik bilgileri yanlışsa, bir hata gösterin.
-          console.log(postData);
-          // ...
-        }
       });
+      router.push("/");
+
   };
 
   return (
@@ -133,7 +138,10 @@ function page() {
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         >
           <div className="mb-4 flex justify-center ">
-            <ColorPicker />
+          <div className="card flex justify-content-center">
+
+            <ColorPicker inputId="cp-hex" format="hex"  value={mainColor} onChange={(e: ColorPickerChangeEvent) => setMainColor(e.value as string)} />
+        </div>
 
             <p className="m-2">Choose your color</p>
           </div>
@@ -199,6 +207,7 @@ function page() {
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
+             
             >
               Sign Up
             </button>
