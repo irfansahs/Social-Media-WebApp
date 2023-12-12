@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 const Comments = ({ user }: { user: any }) => {
+  
   const handleDelete = async () => {
     try {
       const response = await fetch(`https://localhost:7197/api/Comments`, {

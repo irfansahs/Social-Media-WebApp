@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@delirius/color-thief-node": "^1.0.0",
+    "@lyket/react": "^2.1.0",
     "chart.js": "^4.4.0",
     "color-thief-react": "^2.1.0",
     "color-thief-ts": "^1.1.1",

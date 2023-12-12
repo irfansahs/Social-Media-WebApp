@@ -4,13 +4,15 @@ import React from "react";
 import MainLayout from "../../Layouts/MainLayout";
 import Post from "../../components/Post";
 import Comments from "@/app/components/Comments";
-
+import { signIn, signOut, useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import WriteComment from "@/app/components/WriteComment";
 function page({ params }: any) {
   const [users, setUsers] = useState([]);
   const [posts, setPosts] = useState();
-  
+  const { data: session } = useSession();
+
+  console.log("irfan data", session?.user?.accessToken);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -30,10 +32,9 @@ function page({ params }: any) {
     };
     fetchUsers();
 
-
     const fetchPosts = async () => {
       const response = await fetch(
-        `https://localhost:7197/api/Post/GetPostById?PostId=${params.postid}`,
+        `https://localhost:7197/api/Post/GetPostById?UserName=${"Ahmet"}&PostId=${params.postid}`,
         {
           method: "GET",
           headers: {
@@ -52,9 +53,7 @@ function page({ params }: any) {
   return (
     <MainLayout>
       <div>
-
-              <Post user={posts} />
-
+        <Post user={posts} />
 
         <WriteComment postid={params.postid} />
         {users.map((user: any) => (

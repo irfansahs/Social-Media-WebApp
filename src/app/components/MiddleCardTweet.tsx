@@ -12,7 +12,7 @@ const MiddleCardTweet = (username:any) => {
   } = useForm();
 
   const onSubmit = (data: any) => {
-    data.userName = "Ahmet";
+    data.userName = session?.user.userName;
 
     console.log(data);
     fetch("https://localhost:7197/api/Post", {
