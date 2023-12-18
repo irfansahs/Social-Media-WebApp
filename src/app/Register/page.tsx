@@ -28,7 +28,6 @@ function page() {
 
   const [profilePhoto, setProfilePhoto] = useState<string>("");
 
-
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   const file = event.target.files?.[0];
 

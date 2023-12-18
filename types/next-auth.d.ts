@@ -7,7 +7,8 @@ declare module "next-auth" {
       accessToken:string,
       idToken?: string,
       image?:string,
-      userName?,
+      userName?:string,
+      profileImage?:string;
     } & DefaultSession["user"]
   }
 }

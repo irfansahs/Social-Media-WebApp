@@ -66,28 +66,40 @@ const Post = ({ user }: { user: any }) => {
     <div className="flex justify-center my-2 rounded-lg">
       <div
         key={user?.id}
-        className="px-5 py-4 bg-gradient-to-br from-gray-400 via-sky-700 to-blue-900 shadow rounded-lg  "
+        className="px-5 py-4 bg-gradient-to-br from-gray-400 via-sky-700 to-blue-900 shadow rounded-lg w-11/12"
       >
-        <div className="flex mb-4">
+        <div className="flex justify-between mb-4">
           <Link href={`/Profile/${user?.userName}`}>
-            <div className="flex-auto">
-              <Avatar
-                label="V"
-                className="mr-2"
-                size="large"
-                style={{ backgroundImage: `${user?.profileImage}` }}
-                shape="circle"
-              />
+            <div className="flex flex-row">
+              <div className="flex-auto">
+                <img
+                  className=" max-h-12 max-w-12 rounded-full"
+                  src={user?.profileImage}
+                  alt={user?.userName}
+                />
+              </div>
+
+              <div className="ml-2 mt-0.5">
+                <span className="block font-medium text-base leading-snug text-white dark:text-gray-100">
+                  {user?.userName}
+                </span>
+                <span className="block text-sm text-white font-light leading-snug">
+                  {user?.createdOn}
+                </span>
+              </div>
             </div>
           </Link>
 
-          <div className="ml-2 mt-0.5">
-            <span className="block font-medium text-base leading-snug text-white dark:text-gray-100">
-              {user?.userName}
-            </span>
-            <span className="block text-sm text-white font-light leading-snug">
-              {user?.createdOn}
-            </span>
+          <div className="relative hover-trigger">
+            More
+            <div className="absolute bg-white border border-grey-100 p-6 hover-target">
+              <button
+                onClick={handleDelete}
+                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+              >
+                Delete
+              </button>
+            </div>
           </div>
         </div>
 
@@ -102,40 +114,29 @@ const Post = ({ user }: { user: any }) => {
           </div>
         </Link>
         <div className="ml-1 text-white font-light">
-          <div className="relative hover-trigger">
-            More
-            <div className="absolute bg-white border border-grey-100 p-6 hover-target">
-              <button
-                onClick={handleDelete}
-                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
-              >
-                Delete
-              </button>
+          <div className="flex justify-between">
+            <div>{user?.commentsCount} Comments</div>
+
+            <div>
+              {user?.likeCount}
+
+              {user?.isLiked ? (
+                <button
+                  onClick={DeleteLike}
+                  className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                >
+                  Delete Like
+                </button>
+              ) : (
+                <button
+                  onClick={CreateLike}
+                  className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                >
+                  Create Like
+                </button>
+              )}
             </div>
           </div>
-
-          <p>
-            {user?.likeCount} Is Liked:
-            {user?.isLiked ? (
-              <button
-                onClick={DeleteLike}
-                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-              >
-                Delete Like
-              </button>
-            ) : (
-              <button
-                onClick={CreateLike}
-                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-              >
-                Create Like
-              </button>
-            )}
-          </p>
-
-          <Link className="py-2 px-4" href={""}>
-            33 comments
-          </Link>
         </div>
       </div>
     </div>

@@ -1,6 +1,10 @@
+import Link from "next/link";
 import React from "react";
+import { useState } from "react";
 
 function Searchbar() {
+  const [search, setSearch] = useState("");
+
   return (
     <form>
       <div
@@ -13,10 +17,12 @@ function Searchbar() {
             className="w-full px-4 py-1 text-gray-800 bg-gradient-to-br from-gray-400 via-sky-700 to-blue-900 rounded-full focus:outline-none"
             placeholder="search"
             x-model="search"
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
         <div>
-          <button
+          <Link
+          href={`Search/${search}`}
             type="submit"
             className="flex items-center bg-transparent justify-center w-12 h-12 text-white rounded-r-lg"
           >
@@ -34,7 +40,7 @@ function Searchbar() {
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               ></path>
             </svg>
-          </button>
+          </Link>
         </div>
       </div>
     </form>

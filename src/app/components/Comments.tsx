@@ -19,44 +19,67 @@ const Comments = ({ user }: { user: any }) => {
   };
 
   return (
-    <div className="">
-      <div
-        className="flex items-center justify-center bg-gradient-to-br from-gray-400 via-sky-700 to-blue-900"
-        key={user.id}
-      >
-        <div className="">
-          <div className="bg-gray-100  rounded px-2 pb-2">
-            <div className="font-medium">
-              <a href="#" className="hover:underline text-sm">
-                <small>{user?.username}</small>
-              </a>
-            </div>
-            <div className="">{user.content}</div>
+    <div className="flex justify-center my-2 rounded-lg">
+    <div
+      key={user?.id}
+      className="px-5 py-4 bg-gradient-to-br from-gray-400 via-sky-700 to-blue-900 shadow rounded-lg w-11/12"
+    >
+      <div className="flex mb-4">
+        <Link href={`/Profile/${user?.userName}`}>
+          <div className="flex-auto">
+            <img
+              className=" max-h-12 max-w-12 rounded-full"
+              src={user?.profileImage}
+              alt={user?.userName}
+            />
           </div>
-          <div className="flex justify-start items-center  w-full">
-            <div className="font-semibold text-gray-700 px-2 flex items-center justify-center ">
-              <a href="#" className="hover:underline">
-                <small>Like</small>
-              </a>
-              <small className="self-center">.</small>
-              <a href="#" className="hover:underline">
-                <small>Reply</small>
-              </a>
-              <small className="self-center">.</small>
-              <a href="#" className="hover:underline">
-                <small>{user.createdOn}</small>
-              </a>
-              <button
-                onClick={handleDelete}
-                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
-              >
-                Delete
-              </button>
-            </div>
+        </Link>
+
+        <div className="ml-2 mt-0.5">
+          <span className="block font-medium text-base leading-snug text-white dark:text-gray-100">
+            {user?.userName}
+          </span>
+          <span className="block text-sm text-white font-light leading-snug">
+            {user?.createdOn}
+          </span>
+        </div>
+      </div>
+
+      <Link href={`/Post/${user?.id}`}>
+        <p className="text-gray-800 dark:text-gray-100 leading-snug md:leading-normal">
+          {user?.content}
+        </p>
+        <div className="flex justify-between items-center mt-5">
+          <div className="flex ">
+            <span className="ml-1 text-white  font-light"> </span>
+          </div>
+        </div>
+      </Link>
+      <div className="ml-1 text-white font-light">
+        <div className="relative hover-trigger">
+          More
+          <div className="absolute bg-white border border-grey-100 p-6 hover-target">
+            
+          </div>
+        </div>
+
+        <div className="flex justify-between">
+          <div>{user?.commentsCount} Comments</div>
+
+          <div>
+            {user?.likeCount}
+
+            <button
+              onClick={handleDelete}
+              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+            >
+              Delete
+            </button>
           </div>
         </div>
       </div>
     </div>
+  </div>
   );
 };
 

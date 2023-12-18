@@ -12,6 +12,7 @@ import MiddleCardTweet from "../components/MiddleCardTweet";
 function page() {
   const [users, setUsers] = useState([]);
   const { data: session } = useSession();
+  
   console.log("irfan data", session?.user?.accessToken);
 
   const {
@@ -30,6 +31,7 @@ function page() {
         },
       });
 
+     
       const users = await response.json();
       setUsers(users);
       console.log(users);

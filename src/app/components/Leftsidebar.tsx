@@ -57,7 +57,7 @@ const Leftsidebar = () => {
           </svg>
           Explore
         </a>
-      
+
         <a
           href="/Messenger"
           className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full text-white hover:text-blue-300 duration-100 hover:bg-opacity-70"
@@ -75,7 +75,6 @@ const Leftsidebar = () => {
           </svg>
           Messages
         </a>
-      
 
         <a
           href="#"
@@ -110,10 +109,13 @@ const Leftsidebar = () => {
             <path d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
 
-          <div className="relative hover-trigger">
+          <div className=" flex  relative hover-trigger">
             More
-            <div className="absolute bg-white border border-grey-100 p-6 hover-target">
-              <SignInButton/>
+            <div className=" bg-white border border-grey-100 p-6 hover-target">
+              <SignInButton />
+            </div>
+            <div className=" bg-white border border-grey-100 p-6 hover-target">
+              <Link href={"EditProfile"}>Edit Profile</Link>
             </div>
           </div>
         </a>

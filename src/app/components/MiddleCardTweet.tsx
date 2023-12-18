@@ -2,7 +2,7 @@ import React from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-const MiddleCardTweet = (username:any) => {
+const MiddleCardTweet = (username: any) => {
   const { data: session } = useSession();
 
   const {
@@ -31,7 +31,7 @@ const MiddleCardTweet = (username:any) => {
           <div className="m-2 w-10 py-1">
             <img
               className="inline-block h-10 w-10 rounded-full"
-              src={`${session?.user?.image}`}
+              src={session?.user?.profileImage}
               alt=""
             />
           </div>
