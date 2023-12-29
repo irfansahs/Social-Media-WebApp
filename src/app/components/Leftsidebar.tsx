@@ -115,7 +115,7 @@ const Leftsidebar = () => {
               <SignInButton />
             </div>
             <div className=" bg-white border border-grey-100 p-6 hover-target">
-              <Link href={"EditProfile"}>Edit Profile</Link>
+              <Link href={"/EditProfile"}>Edit Profile</Link>
             </div>
           </div>
         </a>

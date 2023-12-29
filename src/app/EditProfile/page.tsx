@@ -110,7 +110,7 @@ export default function page() {
 
   return (
     <div className="max-w-[1200px] mx-auto h-screen  justify-content-center items-center">
-      <div className="  max-w-lg">
+      <div className=" flex justify-center  ">
         <form onSubmit={handleSubmit(onSubmit)}>
           <Toast ref={toast} />
 
@@ -142,47 +142,6 @@ export default function page() {
         </div>
       </div>
           
-          
-          
-          
-          
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                newUserName
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="newUserName"
-                type="text"
-                value={session?.user?.userName}
-                {...register("newUserName", { required: true })}
-              />
-              {errors.newUserName && (
-                <p className="text-red-500 text-xs italic">
-                  Please choose a username.
-                </p>
-              )}
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                userColor
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="userColor"
-                type="text"
-                placeholder="userColor"
-                value={session?.user?.address}
-                {...register("userColor", { required: true })}
-              />
-              {errors.userColor && (
-                <p className="text-red-500 text-xs italic">
-                  Please choose a username.
-                </p>
-              )}
-            </div>
-
             <div className="mb-4 flex justify-center ">
               <div className="card flex justify-content-center">
                 <ColorPicker
@@ -219,22 +178,23 @@ export default function page() {
 
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">
-                profileImage
+                Phone Number
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="profileImage"
+                id="email"
                 type="text"
-                placeholder="profileImage"
-                value={session?.user.profileImage}
-                {...register("profileImage", { required: true })}
+                placeholder="Phone Number"
+                value={session?.user?.email as string}
+                {...register("phoneNumber", { required: true })}
               />
-              {errors.profileImage && (
+              {errors.email && (
                 <p className="text-red-500 text-xs italic">
-                  Please choose a username.
+                  Please enter a number
                 </p>
               )}
             </div>
+
 
             <Button label="Submit" type="submit" icon="pi pi-check" />
           </div>

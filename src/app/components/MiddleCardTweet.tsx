@@ -11,17 +11,50 @@ const MiddleCardTweet = (username: any) => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data:any) => {
+    // Kullanıcı adını oturum bilgilerinden al
     data.userName = session?.user.userName;
 
-    console.log(data);
-    fetch("https://localhost:7197/api/Post", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    }).then((response) => response.json());
+    // Gönderi içeriğini analiz et
+    data.tagNames = extractHashtags(data.content);
+
+    try {
+      // API'ye gönderi oluşturma isteği yap
+      const response = await fetch("https://localhost:7197/api/Post", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error("Gönderi oluşturulamadı.");
+      }
+
+      // Gönderi başarıyla oluşturulduysa sayfayı güncelle
+      // Örneğin, bir API çağrısı yaparak güncel verileri alabilirsiniz
+      // Güncellenen verilere göre sayfanızı yeniden düzenleyin veya kullanıcıya geri bildirim verin
+
+      console.log("Gönderi başarıyla oluşturuldu.");
+
+      // Formu sıfırla (isteğe bağlı)
+    } catch (error) {
+      console.error("Hata:", error);
+    }
+  };
+
+  // Helper fonksiyon: Hashtag'leri çıkarmak için
+  const extractHashtags = (content:any) => {
+    const hashtagRegex = /#(\w+)/g;
+    const matches = content.match(hashtagRegex);
+
+    if (matches) {
+      // Hashtag'lerin tamamını al
+      return matches;
+    }
+
+    return [];
   };
 
   return (

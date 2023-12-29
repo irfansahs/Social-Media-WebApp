@@ -3,6 +3,8 @@ import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { useRouter } from "next/navigation";
+
 
 const handler = NextAuth({
   providers: [
@@ -41,7 +43,7 @@ const handler = NextAuth({
             password: credentials?.password,
           }),
         });
-      
+ 
         const user = await response.json();
         user.id = 1;
         if (user) {
@@ -63,7 +65,6 @@ const handler = NextAuth({
         name: user.name,
         email: user.email,
       };
-
       try {
         console.log(data);
         await fetch(" http://localhost:5196/api/User/GoogleLogin", {

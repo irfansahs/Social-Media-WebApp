@@ -46,7 +46,7 @@ const Comments = ({ user }: { user: any }) => {
       </div>
 
       <Link href={`/Post/${user?.id}`}>
-        <p className="text-gray-800 dark:text-gray-100 leading-snug md:leading-normal">
+        <p className="text-gray-800 dark:text-gray-100 leading-snug md:leading-normal hashTag">
           {user?.content}
         </p>
         <div className="flex justify-between items-center mt-5">

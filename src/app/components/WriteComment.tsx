@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 function WriteComment(props:any) {
   const {
@@ -7,12 +8,12 @@ function WriteComment(props:any) {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  const { data: session } = useSession();
 
   const onSubmit = (data: any) => {
 
     data.postid = props.postid;
-
+    data.UserName = session?.user.userName;
     console.log(data);
     fetch("https://localhost:7197/api/Comments", {
       method: "POST",

@@ -22,7 +22,7 @@ function Searchbar() {
         </div>
         <div>
           <Link
-          href={`Search/${search}`}
+          href={`/Search/${search}`}
             type="submit"
             className="flex items-center bg-transparent justify-center w-12 h-12 text-white rounded-r-lg"
           >

@@ -1,21 +1,31 @@
-import React from "react";
+import React, { useEffect,useState } from "react";
 import Link from "next/link";
 
 const TrendingPosts = () => {
-  const tabs = [
-    {
-      name: "Login",
-      url: "/",
-    },
-    {
-      name: "Register",
-      url: "/Register",
-    },
-    {
-      name: "Home",
-      url: "/Home",
-    },
-  ];
+  const [users, setUsers] = useState([]);
+  
+    useEffect(() => {
+      const fetchUsers = async () => {
+        const response = await fetch(
+          "https://localhost:7197/api/Post/GetTrends",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+  
+        const users = await response.json();
+        setUsers(users);
+        console.log(users);
+      };
+      fetchUsers();
+    }, []);
+
+
+
+ 
 
   return (
     <div className="max-w-sm rounded-lg bg-dim-700 overflow-hidden shadow-lg  bg-gradient-to-br from-gray-400 via-sky-700 to-blue-900 ">
@@ -27,7 +37,7 @@ const TrendingPosts = () => {
         </div>
       </div>
 
-      {tabs.map((tab, i) => (
+      {users.map((tab: any, i) => (
         <Link key={i} href={`/Search/${tab.url}`}>
           <div className="flex">
             <div className="flex-1">
@@ -35,7 +45,7 @@ const TrendingPosts = () => {
                 1 . Trending
               </p>
               <h2 className="px-4 ml-2 w-48 font-bold text-white">
-                #{tab.name}
+                {tab.name}<p>{tab.count}</p>
               </h2>
              
             </div>
@@ -43,7 +53,7 @@ const TrendingPosts = () => {
               <a
                 href=""
                 className=" text-2xl rounded-full text-gray-400 hover:bg-gray-800 hover:text-blue-300 float-right"
-              >
+              > 
                 <svg
                   className="m-2 h-5 w-5"
                   fill="none"
@@ -57,6 +67,7 @@ const TrendingPosts = () => {
                 </svg>
               </a>
             </div>
+           
           </div>
         </Link>
       ))}

@@ -24,6 +24,44 @@ function page({ params }: any) {
 
   console.log("irfan data", session?.user);
 
+  
+
+  const CreateFollow = async () => {
+    try {
+      const response = await fetch(`https://localhost:7197/api/Follow`, {
+        method: "Post",
+        headers: {
+          "Content-Type": "application/json",
+          // Add any additional headers if needed
+        },
+        body: JSON.stringify({ followTo: params.UserName, userName: session?.user?.userName }),
+      });
+
+      console.log("Post deleted successfully");
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  const DeleteFollow = async () => {
+    try {
+      const response = await fetch(`https://localhost:7197/api/Follow`, {
+        method: "Delete",
+        headers: {
+          "Content-Type": "application/json",
+          // Add any additional headers if needed
+        },
+        body: JSON.stringify({ followTo:params.UserName , userName: session?.user?.userName }),
+      });
+
+      console.log("Post deleted successfully");
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  // ilk #0098b7
+  // ikinci 
+
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -69,43 +107,8 @@ function page({ params }: any) {
     // Call the fetch functions
     fetchProfile();
     fetchPosts();
-  }, [params.UserName]); // Add dependencies if necessary
+  }, [CreateFollow,DeleteFollow]); // Add dependencies if necessary
 
-  const CreateFollow = async () => {
-    try {
-      const response = await fetch(`https://localhost:7197/api/Follow`, {
-        method: "Post",
-        headers: {
-          "Content-Type": "application/json",
-          // Add any additional headers if needed
-        },
-        body: JSON.stringify({ followTo: params.UserName, userName: session?.user?.userName }),
-      });
-
-      console.log("Post deleted successfully");
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-  const DeleteFollow = async () => {
-    try {
-      const response = await fetch(`https://localhost:7197/api/Follow`, {
-        method: "Delete",
-        headers: {
-          "Content-Type": "application/json",
-          // Add any additional headers if needed
-        },
-        body: JSON.stringify({ followTo:params.UserName , userName: session?.user?.userName }),
-      });
-
-      console.log("Post deleted successfully");
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
-  // ilk #0098b7
-  // ikinci 
 
   return (
     <MainLayout>

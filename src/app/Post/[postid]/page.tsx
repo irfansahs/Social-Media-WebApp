@@ -34,7 +34,7 @@ function page({ params }: any) {
 
     const fetchPosts = async () => {
       const response = await fetch(
-        `https://localhost:7197/api/Post/GetPostById?UserName=${"Ahmet"}&PostId=${params.postid}`,
+        `https://localhost:7197/api/Post/GetPostById?UserName=${session?.user.userName}&PostId=${params.postid}`,
         {
           method: "GET",
           headers: {
@@ -48,7 +48,7 @@ function page({ params }: any) {
       console.log(posts);
     };
     fetchPosts();
-  }, []);
+  }, [posts]);
 
   return (
     <MainLayout>
