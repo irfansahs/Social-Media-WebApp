@@ -41,6 +41,8 @@ function page({ params }: any) {
     } catch (error) {
       console.error("Error:", error);
     }
+    fetchProfile();
+    fetchPosts();
   };
   const DeleteFollow = async () => {
     try {
@@ -57,12 +59,15 @@ function page({ params }: any) {
     } catch (error) {
       console.error("Error:", error);
     }
+
+
+    fetchProfile();
+    fetchPosts();
   };
 
   // ilk #0098b7
   // ikinci 
 
-  useEffect(() => {
     const fetchProfile = async () => {
       try {
         const response = await fetch(
@@ -104,10 +109,11 @@ function page({ params }: any) {
       }
     };
 
-    // Call the fetch functions
+  useEffect(() => {
+
     fetchProfile();
     fetchPosts();
-  }, [CreateFollow,DeleteFollow]); // Add dependencies if necessary
+  }, []); 
 
 
   return (
@@ -121,6 +127,7 @@ function page({ params }: any) {
                 <img
                 className=" rounded-full"
                   src={profile?.profileImage}
+                  alt={profile?.profileImage}
                 />
             </div>
           </div>
@@ -154,17 +161,17 @@ function page({ params }: any) {
             {profile?.followCount} Is FollowEd:
             {profile?.isFollow ? (
               <button
-                onClick={CreateFollow}
+                onClick={DeleteFollow}
                 className="bg-transparent hover:bg-gray-800 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded-full"
               >
-               +
+               -
               </button>
             ) : (
               <button
-               onClick={DeleteFollow}
+               onClick={CreateFollow}
                className="bg-transparent hover:bg-gray-800 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded-full"
              >
-              -
+              +
              </button>
             )} 
 
@@ -173,9 +180,9 @@ function page({ params }: any) {
 
         </div>
         <div>
-          {users?.map((user: any) => (
-            <Post key={user.id} user={user} />
-          ))}
+        <div>
+            <Post  request={`https://localhost:7197/api/Post/GetAllPostsByUserName?UserName=${params.UserName}`} />
+        </div>
         </div>
       </div>
     </MainLayout>

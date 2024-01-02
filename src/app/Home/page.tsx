@@ -27,25 +27,9 @@ function page() {
     formState: { errors },
   } = useForm();
 
-  useLayoutEffect(() => {
-    const fetchUsers = async () => {
-      const response = await fetch(
-        `https://localhost:7197/api/Post?UserName=${session?.user.userName}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${session?.user?.accessToken}`,
-          },
-        }
-      );
-
-      const users = await response.json();
-      setUsers(users);
-      console.log(users);
-    };
-    fetchUsers();
-  }, []);
+  
+  useEffect(() => {
+  }, []); 
 
   return (
     <MainLayout>
@@ -53,9 +37,7 @@ function page() {
         <MiddleCardTweet />
 
         <div>
-          {users.map((user: any) => (
-            <Post key={user.id} user={user} />
-          ))}
+            <Post  request={`https://localhost:7197/api/Post?UserName=${session?.user.userName}`} />
         </div>
       </div>
     </MainLayout>

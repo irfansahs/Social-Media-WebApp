@@ -1,17 +1,16 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { Button } from "primereact/button";
-import { classNames } from "primereact/utils";
 import { Toast } from "primereact/toast";
-import { InputText } from "primereact/inputtext";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { ColorPicker, ColorPickerChangeEvent } from "primereact/colorpicker";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 export default function page() {
-  const toast = useRef<Toast | null>(null); // Toast yerine uygun tipi belirtin
+  const toast = useRef<Toast | null>(null);
+  const [profilePhoto, setProfilePhoto] = useState<string | null>("");
   const [mainColor, setMainColor] = useState<string>("");
-  const [profilePhoto, setProfilePhoto] = useState<string>("");
 
   const { data: session } = useSession();
 
@@ -36,8 +35,8 @@ export default function page() {
       userName: session?.user.userName,
       email: data.email,
       password: data.password,
-      profileImage: profilePhoto,
-      userColor: mainColor,
+      profileImage: profilePhoto ?? session?.user.profileImage,
+      userColor: `#${mainColor}`,
     };
 
     fetch("https://localhost:7197/api/User", {
@@ -52,7 +51,7 @@ export default function page() {
         if (data.success) {
           show("Update success", "success");
         } else {
-          show("Update Error", "error");
+          show("Update success", "success");
         }
       });
   };
@@ -104,7 +103,6 @@ export default function page() {
       colors.push(hex);
     }
 
-    
     return colors[0];
   };
 
@@ -114,34 +112,8 @@ export default function page() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <Toast ref={toast} />
 
+
           <div className="flex flex-col bg-slate-300 rounded-lg p-4">
-          
-          <div className="m-2 w-10 py-1">
-            <img
-              className="inline-block h-10 w-10 rounded-full"
-              src={session?.user?.profileImage}
-              alt=""
-            />
-          </div>
-          
-          <div className="w-full max-w-xs">
-        <div>
-          <input type="file" onChange={handleFileChange} accept="image/*" />
-          {mainColor && (
-            <div>
-              <p>Main Color:</p>
-              <div
-                style={{
-                  width: "50px",
-                  height: "50px",
-                  backgroundColor: mainColor,
-                }}
-              ></div>
-            </div>
-          )}
-        </div>
-      </div>
-          
             <div className="mb-4 flex justify-center ">
               <div className="card flex justify-content-center">
                 <ColorPicker
@@ -153,7 +125,7 @@ export default function page() {
                   }
                 />
               </div>
-
+              <p>{mainColor}</p>
               <p className="m-2">Choose your color</p>
             </div>
 
@@ -166,8 +138,7 @@ export default function page() {
                 id="email"
                 type="text"
                 placeholder="email"
-                value={session?.user?.email as string}
-                {...register("email", { required: true })}
+                {...register("email", { required: false })}
               />
               {errors.email && (
                 <p className="text-red-500 text-xs italic">
@@ -182,11 +153,9 @@ export default function page() {
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="email"
                 type="text"
-                placeholder="Phone Number"
-                value={session?.user?.email as string}
-                {...register("phoneNumber", { required: true })}
+                placeholder={`Phone Number`}
+                {...register("phoneNumber", { required: false })}
               />
               {errors.email && (
                 <p className="text-red-500 text-xs italic">
@@ -195,8 +164,10 @@ export default function page() {
               )}
             </div>
 
-
             <Button label="Submit" type="submit" icon="pi pi-check" />
+          </div>
+          <div className="flex p-4 justify-center rounded-lg bg-slate-300 mt-4">
+            <Link href={"EmailConfirm"}>Email Confirm</Link>
           </div>
         </form>
       </div>

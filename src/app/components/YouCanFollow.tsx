@@ -85,10 +85,10 @@ const YouCanFollow = () => {
                       </div>
                       <div className=" ml-1 mt-3">
                         <p className="text-base leading-6 font-medium text-white">
-                          {user.name}
+                        {user?.userName}
                         </p>
                         <p className="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
-                          @ShonaDesign
+                          @{user?.userName}
                         </p>
                       </div>
                     </div>
@@ -97,17 +97,17 @@ const YouCanFollow = () => {
                 <div className="flex-1  py-1 m-1">
                   {user?.isFollow ? (
                     <button
-                      onClick={CreateFollow}
-                      className="bg-transparent hover:bg-gray-800 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded-full"
-                    >
-                      +
-                    </button>
-                  ) : (
-                    <button
                       onClick={DeleteFollow}
                       className="bg-transparent hover:bg-gray-800 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded-full"
                     >
                       -
+                    </button>
+                  ) : (
+                    <button
+                      onClick={CreateFollow}
+                      className="bg-transparent hover:bg-gray-800 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded-full"
+                    >
+                      +
                     </button>
                   )}
                 </div>

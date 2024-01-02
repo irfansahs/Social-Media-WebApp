@@ -60,7 +60,7 @@ const Leftsidebar = () => {
 
         <a
           href="/Messenger"
-          className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full text-white hover:text-blue-300 duration-100 hover:bg-opacity-70"
+          className=" hidden mt-1 group  items-center px-2 py-2 text-base leading-6 font-medium rounded-full text-white hover:text-blue-300 duration-100 hover:bg-opacity-70"
         >
           <svg
             className="mr-4 h-6 w-6"

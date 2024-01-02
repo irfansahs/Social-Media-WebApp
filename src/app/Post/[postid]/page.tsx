@@ -14,7 +14,6 @@ function page({ params }: any) {
 
   console.log("irfan data", session?.user?.accessToken);
 
-  useEffect(() => {
     const fetchUsers = async () => {
       const response = await fetch(
         `https://localhost:7197/api/Comments?PostId=${params.postid}`,
@@ -30,30 +29,16 @@ function page({ params }: any) {
       setUsers(users);
       console.log(users);
     };
+
+  useEffect(() => {
     fetchUsers();
-
-    const fetchPosts = async () => {
-      const response = await fetch(
-        `https://localhost:7197/api/Post/GetPostById?UserName=${session?.user.userName}&PostId=${params.postid}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      const posts = await response.json();
-      setPosts(posts);
-      console.log(posts);
-    };
-    fetchPosts();
-  }, [posts]);
+  }, []);
 
   return (
     <MainLayout>
       <div>
-        <Post user={posts} />
+
+        <Post request={`https://localhost:7197/api/Post/GetPostById?UserName=${session?.user.userName}&PostId=${params.postid}`}  />
 
         <WriteComment postid={params.postid} />
         {users.map((user: any) => (
