@@ -7,6 +7,7 @@ import Providers from "./components/Providers";
 import Navbar from "./components/Navbar";
 import 'primeicons/primeicons.css';
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

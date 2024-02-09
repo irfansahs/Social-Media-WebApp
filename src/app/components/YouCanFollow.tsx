@@ -10,7 +10,7 @@ const YouCanFollow = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       const response = await fetch(
-        "https://localhost:7197/api/User/GetWhoToFollowQuery",
+        "https://localhost:7197/api/User/GetWhoToFollowQuery?UserId=",
         {
           method: "GET",
           headers: {
@@ -69,7 +69,8 @@ const YouCanFollow = () => {
   return (
     <div className="flex items-center justify-center rounded-lg bg-gradient-to-br from-gray-400 via-sky-700 to-blue-900 ">
       <ul>
-        {users.map((user: any, i) => (
+     
+        {users.map((user: any, i:any) => (
           <div key={i}>
             <li>
               <div className="flex ">

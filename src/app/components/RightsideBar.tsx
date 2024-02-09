@@ -9,9 +9,8 @@ const RightsideBar = () => {
   return (
     <aside className="grid gap-4 top-0 right-0 z-40 w-76  ">
       <Searchbar />
-      <TrendingPosts />
+      <TrendingPosts/>
       <FeelingChart />
-      <YouCanFollow />
     </aside>
   );
 };

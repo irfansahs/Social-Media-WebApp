@@ -1,9 +1,11 @@
 import React from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { MainContext, useContext } from "../components/Context";
 
-const MiddleCardTweet = (username: any) => {
+const MiddleCardTweet = () => {
   const { data: session } = useSession();
+  const {setPostData,fetchPosts} = useContext(MainContext);
 
   const {
     register,
@@ -13,8 +15,8 @@ const MiddleCardTweet = (username: any) => {
 
   const onSubmit = async (data:any) => {
     // Kullanıcı adını oturum bilgilerinden al
-    data.userName = session?.user.userName;
-
+    data.userName = session?.user.userId;
+    fetchPosts();
     // Gönderi içeriğini analiz et
     data.tagNames = extractHashtags(data.content);
 

@@ -22,9 +22,6 @@ const TrendingPosts = () => {
       };
       fetchUsers();
     }, []);
-
-
-
  
 
   return (
@@ -36,7 +33,6 @@ const TrendingPosts = () => {
           </h2>
         </div>
       </div>
-
       {users.map((tab: any, i) => (
         <Link key={i} href={`/Search/${tab.name}`}>
           <div className="flex">
@@ -53,6 +49,7 @@ const TrendingPosts = () => {
                     </div>
         </Link>
       ))}
+
     </div>
   );
 };

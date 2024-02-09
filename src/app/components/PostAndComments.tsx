@@ -5,15 +5,14 @@ import { Badge } from "primereact/badge";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Provider, LikeButton } from "@lyket/react";
 import { useState } from "react";
+import WriteComment from "./WriteComment";
 import { MainContext,useContext } from "./Context";
 
-const Post = (props: any) => {
+const PostAndComments = (props: any) => {
   const { data: session } = useSession();
+  console.log("irfan data", session?.user?.accessToken);
 
-  console.log("irfan data PostComponent", session?.user?.accessToken);
-
-  const {setPostData,fetchPosts} = useContext(MainContext);
-  
+  const {setPostData,fetchPostData} = useContext(MainContext);
 
   const handleDelete = async (id: any) => {
     try {
@@ -25,7 +24,7 @@ const Post = (props: any) => {
             "Content-Type": "application/json",
             // Add any additional headers if needed
           },
-          body: JSON.stringify({ postId: id, userId: session?.user.userId }),
+          body: JSON.stringify({ postId: id }),
         }
       );
 
@@ -33,7 +32,8 @@ const Post = (props: any) => {
     } catch (error) {
       console.error("Error:", error);
     }
-    fetchPosts();
+    fetchPostData();
+
   };
 
   const CreateLike = async (id: any) => {
@@ -47,12 +47,14 @@ const Post = (props: any) => {
         body: JSON.stringify({ postId: id, userId: session?.user.userId }),
       });
 
-      console.log("Post deleted successfully");
+      console.log("Like Created successfully" + session?.user.userId);
     } catch (error) {
       console.error("Error:", error);
     }
-    fetchPosts();
+    fetchPostData();
+
   };
+
   const DeleteLike = async (id: any) => {
     try {
       const response = await fetch(`https://localhost:7197/api/Lİke`, {
@@ -68,40 +70,36 @@ const Post = (props: any) => {
     } catch (error) {
       console.error("Error:", error);
     }
-    fetchPosts();
+    fetchPostData();
   };
-
-  
 
   return (
     <div className="flex flex-col justify-center my-2 rounded-lg ">
+       <div className="flex flex-col justify-center my-2 rounded-lg">
         <div
-          key={props.props?.id}
-          className="px-5 py-4  shadow rounded-lg mb-4 mr-8 ml-8"
-          style={{ backgroundColor: ` ${props.props?.userColor}` }}
+          className="px-5 py-4 shadow rounded-lg mb-4 mr-8 ml-8"
+          style={{ backgroundColor: ` ${props?.props.userColor}` }}
         >
           <div className="flex justify-between mb-4">
-            <Link href={`/Profile/${props.props?.userName}`}>
+            <Link href={`/Profile/${props?.props.userName}`}>
               <div className="flex flex-row">
                 <div className="flex-auto">
                   <img
-                    className=" max-h-12 max-w-12 rounded-full"
-                    src={props.props?.profileImage}
-                    alt={props.props?.userName}
+                    className="max-h-12 max-w-12 rounded-full"
+                    src={props?.props.profileImage}
+                    alt={props?.props.userName}
                   />
                 </div>
-
                 <div className="ml-2 mt-0.5">
                   <span className="block font-medium text-base leading-snug text-white dark:text-gray-100">
-                    {props.props?.userName}
+                    {props?.props.userName}
                   </span>
                   <span className="block text-sm text-white font-light leading-snug">
-                    {props.props?.createdOn}
+                    {props?.props.createdOn}
                   </span>
                 </div>
               </div>
             </Link>
-
             <div className="relative hover-trigger">
               More
               <div className="absolute bg-white border border-grey-100 p-6 hover-target">
@@ -114,21 +112,17 @@ const Post = (props: any) => {
               </div>
             </div>
           </div>
-
-          <Link href={`/Post/${props.props?.id}`}>
-            <p className="  leading-snug md:leading-normal ">{props.props?.content}</p>
-            <div className="flex justify-between items-center mt-5">
-              <div className="flex ">
-                <span className="ml-1 text-white  font-light"> </span>
-              </div>
+          <p className="leading-snug md:leading-normal ">{props?.props.content}</p>
+          <div className="flex justify-between items-center mt-5">
+            <div className="flex ">
+              <span className="ml-1 text-white  font-light"> </span>
             </div>
-          </Link>
+          </div>
           <div className="ml-1 text-white font-light">
             <div className="flex justify-between">
-              <div>{props.props?.commentsCount} Comments</div>
-
+              <div>{props?.props.commentsCount} Comments</div>
               <div className="flex flex-row">
-                <p className="p-2 flex justify-center">{props.props?.likeCount}</p>
+                <p className="p-2 flex justify-center">{props?.props.likeCount}</p>
                 {props.props?.isLiked ? (
                   <button
                     onClick={() => DeleteLike(props.props?.id)}
@@ -167,9 +161,18 @@ const Post = (props: any) => {
               </div>
             </div>
           </div>
+
+
+          {props.props.comments &&
+            props.props.comments.map((comment: any) => (
+              <div key={comment.id}>
+                <p>{comment.content}</p>
+              </div>
+            ))}
         </div>
+      </div>
     </div>
   );
 };
 
-export default Post;
+export default PostAndComments;

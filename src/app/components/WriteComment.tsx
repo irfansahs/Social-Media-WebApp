@@ -1,28 +1,43 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { MainContext, useContext } from "./Context";
 
-function WriteComment(props:any) {
+function WriteComment(props: any) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const { data: session } = useSession();
+  const { setPostData, fetchPostData } = useContext(MainContext);
 
-  const onSubmit = (data: any) => {
-
-    data.postid = props.postid;
-    data.UserName = session?.user.userName;
+  const onSubmit = async (data: any) => {
+    data.postId = props.props.id;
+    data.userId = session?.user.userId;
     console.log(data);
-    fetch("https://localhost:7197/api/Comments", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json());
+
+    try {
+      const response = await fetch("https://localhost:7197/api/Comments", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        // Yorum başarıyla gönderildi, şimdi sayfanın içeriğini güncelleyebiliriz
+        await fetchPostData();
+      } else {
+        // API'den hata döndü
+        console.error("Error posting comment:", response.statusText);
+      }
+    } catch (error) {
+      // Fetch sırasında bir hata oluştu
+      console.error("Error posting comment:", error);
+    }
   };
 
   return (
@@ -49,6 +64,7 @@ function WriteComment(props:any) {
             className="bg-white duration-100 text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-blue-600 hover:text-white"
             value="Post Comment"
           />
+          <button onClick={() => fetchPostData()}>yenile</button>
         </div>
       </form>
     </div>

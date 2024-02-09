@@ -24,7 +24,25 @@ function page({ params }: any) {
 
   console.log("irfan data", session?.user);
 
-  
+  const fetchProfile = async () => {
+    try {
+      const response = await fetch(
+        `https://localhost:7197/api/User/GetUserByName?UserId=${session?.user?.userId}&ProfileName=${params.UserName}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const profiles = await response.json();
+      setProfile(profiles);
+      console.log(profiles);
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+    }
+  };
 
   const CreateFollow = async () => {
     try {
@@ -34,7 +52,7 @@ function page({ params }: any) {
           "Content-Type": "application/json",
           // Add any additional headers if needed
         },
-        body: JSON.stringify({ followTo: params.UserName, userName: session?.user?.userName }),
+        body: JSON.stringify({ followerId: params.UserName, followingId: session?.user?.userId }),
       });
 
       console.log("Post deleted successfully");
@@ -52,7 +70,7 @@ function page({ params }: any) {
           "Content-Type": "application/json",
           // Add any additional headers if needed
         },
-        body: JSON.stringify({ followTo:params.UserName , userName: session?.user?.userName }),
+        body: JSON.stringify({ followerId: params.UserName, followingId: session?.user?.userId }),
       });
 
       console.log("Post deleted successfully");
@@ -68,25 +86,7 @@ function page({ params }: any) {
   // ilk #0098b7
   // ikinci 
 
-    const fetchProfile = async () => {
-      try {
-        const response = await fetch(
-          `https://localhost:7197/api/User/GetUserByName?UserName=${session?.user?.userName}&ProfileName=${params.UserName}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        const profiles = await response.json();
-        setProfile(profiles);
-        console.log(profiles);
-      } catch (error) {
-        console.error("Error fetching profile:", error);
-      }
-    };
+    
 
     const fetchPosts = async () => {
       try {
@@ -181,7 +181,6 @@ function page({ params }: any) {
         </div>
         <div>
         <div>
-            <Post  request={`https://localhost:7197/api/Post/GetAllPostsByUserName?UserName=${params.UserName}`} />
         </div>
         </div>
       </div>
